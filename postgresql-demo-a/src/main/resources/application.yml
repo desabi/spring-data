@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: postgresql-demo-a
+  datasource:
+    url: jdbc:postgresql://localhost:5432/db_tests
+    username: postgres
+    password: desaps
+  jpa:
+    hibernate:
+      ddl-auto: update
