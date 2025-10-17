@@ -1,0 +1,8 @@
+spring:
+  application:
+  name: crud-mongodb-ega
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: crudega
