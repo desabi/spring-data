@@ -11,4 +11,5 @@ public interface PersonService {
   ResponseEntity<List<PersonEntity>> read();
   ResponseEntity<PersonEntity> read(Long id);
   ResponseEntity<HttpStatus> update(Long id, PersonRequest personRequest);
+  ResponseEntity<HttpStatus> delete(Long id);
 }

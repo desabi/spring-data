@@ -82,4 +82,21 @@ public class PersonServiceImpl implements PersonService {
       return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
+
+  @Override
+  public ResponseEntity<HttpStatus> delete(Long id) {
+    try {
+      Optional<PersonEntity> personEntityOptional = personRepository.findById(id);
+      if (personEntityOptional.isPresent()) {
+        PersonEntity personEntity = personEntityOptional.get();
+        personRepository.delete(personEntity);
+        return new ResponseEntity<>(HttpStatus.OK);
+      } else {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+      }
+    } catch (Exception exception) {
+      log.error("Exception deleting person with id: {}, {}", exception.getMessage(), id);
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
 }
