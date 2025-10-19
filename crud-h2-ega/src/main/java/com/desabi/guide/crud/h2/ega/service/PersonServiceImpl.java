@@ -58,4 +58,28 @@ public class PersonServiceImpl implements PersonService {
       return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
+
+  @Override
+  public ResponseEntity<HttpStatus> update(Long id, PersonRequest personRequest) {
+    try {
+      Optional<PersonEntity> personEntityOptional = personRepository.findById(id);
+
+      if (personEntityOptional.isPresent()) {
+        PersonEntity personEntity = personEntityOptional.get();
+
+        personEntity.setName(personRequest.getName());
+        personEntity.setHeight(personRequest.getHeight());
+        personEntity.setHobbies(personRequest.getHobbies());
+
+        personRepository.save(personEntity);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+      } else {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+      }
+    } catch (Exception exception) {
+      log.error("Exception updating person with id: {}, {}", exception.getMessage(), id);
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
 }
